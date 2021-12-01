@@ -15,7 +15,7 @@
 #include "SKSE/Trampoline.h"
 
 
-std::string TemperFactorManager::AsVanilla(UInt32 a_level, bool a_isWeapon)
+std::string TemperFactorManager::AsVanilla(std::uint32_t a_level, bool a_isWeapon)
 {
 	static GMSTCache cache;
 	switch (a_level) {
@@ -35,7 +35,7 @@ std::string TemperFactorManager::AsVanilla(UInt32 a_level, bool a_isWeapon)
 }
 
 
-std::string TemperFactorManager::AsVanillaPlus(UInt32 a_level, bool a_isWeapon)
+std::string TemperFactorManager::AsVanillaPlus(std::uint32_t a_level, bool a_isWeapon)
 {
 	auto result = AsVanilla(a_level, a_isWeapon);
 	if (a_level > 5) {
@@ -46,13 +46,13 @@ std::string TemperFactorManager::AsVanillaPlus(UInt32 a_level, bool a_isWeapon)
 }
 
 
-std::string TemperFactorManager::AsPlusN(UInt32 a_level, [[maybe_unused]] bool a_isWeapon)
+std::string TemperFactorManager::AsPlusN(std::uint32_t a_level, [[maybe_unused]] bool a_isWeapon)
 {
 	return std::string("+") + std::to_string(a_level);
 }
 
 
-std::string TemperFactorManager::AsInternal(UInt32 a_level, [[maybe_unused]] bool a_isWeapon)
+std::string TemperFactorManager::AsInternal(std::uint32_t a_level, [[maybe_unused]] bool a_isWeapon)
 {
 	std::string result = std::to_string((a_level / 10) + 1);
 	result += ".";
@@ -61,7 +61,7 @@ std::string TemperFactorManager::AsInternal(UInt32 a_level, [[maybe_unused]] boo
 }
 
 
-std::string TemperFactorManager::AsCustom(UInt32 a_level, [[maybe_unused]] bool a_isWeapon)
+std::string TemperFactorManager::AsCustom(std::uint32_t a_level, [[maybe_unused]] bool a_isWeapon)
 {
 	std::size_t idx = a_level - 1;
 	if (idx < Settings::customNames->size()) {
@@ -72,9 +72,9 @@ std::string TemperFactorManager::AsCustom(UInt32 a_level, [[maybe_unused]] bool 
 }
 
 
-std::string TemperFactorManager::AsRomanNumeral(UInt32 a_level, [[maybe_unused]] bool a_isWeapon)
+std::string TemperFactorManager::AsRomanNumeral(std::uint32_t a_level, [[maybe_unused]] bool a_isWeapon)
 {
-	constexpr std::pair<UInt32, std::string_view> MILESTONES[] = {
+	constexpr std::pair<std::uint32_t, std::string_view> MILESTONES[] = {
 		{ 1, "I" },
 		{ 4, "IV" },
 		{ 5, "V" },
@@ -111,7 +111,7 @@ const char* TemperFactorManager::GetTemperFactor(float a_factor, bool a_isWeapon
 		return 0;
 	}
 
-	auto level = static_cast<UInt32>(fLevel);
+	auto level = static_cast<std::uint32_t>(fLevel);
 	auto it = _stringCache.insert(_formatterMap(level, a_isWeapon));
 	return it.first != _stringCache.end() ? it.first->c_str() : 0;
 }
@@ -177,7 +177,7 @@ TemperFactorManager::FormatterMap::FormatterMap() :
 }
 
 
-std::string TemperFactorManager::FormatterMap::operator()(UInt32 a_factor, bool a_isWeapon)
+std::string TemperFactorManager::FormatterMap::operator()(std::uint32_t a_factor, bool a_isWeapon)
 {
 	auto it = _map.find(*Settings::style);
 	if (it != _map.end()) {
