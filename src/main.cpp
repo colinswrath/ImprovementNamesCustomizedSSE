@@ -1,61 +1,65 @@
-﻿#include "Settings.h"
+#include "Settings.h"
 #include "TemperFactorManager.h"
 #include "version.h"
 
 #include "SKSE/API.h"
 
-
-extern "C" {
-	bool SKSEPlugin_Query(const SKSE::QueryInterface* a_skse, SKSE::PluginInfo* a_info)
-	{
-		SKSE::Logger::OpenRelative(FOLDERID_Documents, L"\\My Games\\Skyrim Special Edition\\SKSE\\ImprovementNamesCustomizedSSE.log");
-		SKSE::Logger::SetPrintLevel(SKSE::Logger::Level::kDebugMessage);
-		SKSE::Logger::SetFlushLevel(SKSE::Logger::Level::kDebugMessage);
-		SKSE::Logger::UseLogStamp(true);
-		SKSE::Logger::TrackTrampolineStats(true);
-
-		_MESSAGE("ImprovementNamesCustomizedSSE v%s", IMPR_VERSION_VERSTRING);
-
-		a_info->infoVersion = SKSE::PluginInfo::kVersion;
-		a_info->name = "ImprovementNamesCustomizedSSE";
-		a_info->version = IMPR_VERSION_MAJOR;
-
-		if (a_skse->IsEditor()) {
-			_FATALERROR("Loaded in editor, marking as incompatible!");
-			return false;
-		}
-
-		auto ver = a_skse->RuntimeVersion();
-		if (ver <= SKSE::RUNTIME_1_5_39) {
-			_FATALERROR("Unsupported runtime version %s!", ver.GetString().c_str());
-			return false;
-		}
-
-		return true;
+void InitLogger()
+{
+#ifndef NDEBUG
+	auto sink = std::make_shared<spdlog::sinks::msvc_sink_mt>();
+#else
+	auto path = logger::log_directory();
+	if (!path) {
+		return;
 	}
 
+	*path /= fmt::format("{}.log"sv, Version::PROJECT);
+	auto sink = std::make_shared<spdlog::sinks::basic_file_sink_mt>(path->string(), true);
+#endif
 
-	bool SKSEPlugin_Load(const SKSE::LoadInterface* a_skse)
-	{
-		_MESSAGE("ImprovementNamesCustomizedSSE loaded");
+	auto log = std::make_shared<spdlog::logger>("global log"s, std::move(sink));
 
-		if (!SKSE::Init(a_skse)) {
-			return false;
-		}
+#ifndef NDEBUG
+	log->set_level(spdlog::level::trace);
+#else
+	log->set_level(spdlog::level::info);
+	log->flush_on(spdlog::level::warn);
+#endif
 
-		if (Settings::loadSettings()) {
-			_MESSAGE("Settings successfully loaded");
-		} else {
-			_FATALERROR("Settings failed to load!");
-			return false;
-		}
+	spdlog::set_default_logger(std::move(log));
+	spdlog::set_pattern("%s(%#): [%^%l%$] %v"s);
 
-		if (!SKSE::AllocTrampoline(1 << 6)) {
-			return false;
-		}
+	logger::info(FMT_STRING("{} v{}"), Version::PROJECT, Version::NAME);
+}
 
-		TemperFactorManager::InstallHooks();
+extern "C" DLLEXPORT constexpr auto SKSEPlugin_Version =
+[]() {
+	SKSE::PluginVersionData v{};
+	v.PluginVersion(Version::MAJOR);
+	v.PluginName(Version::PROJECT);
+	v.AuthorName("fudgyduff and colinswrath"sv);
+	v.UsesAddressLibrary(true);
+	return v;
+}();
 
-		return true;
+extern "C" DLLEXPORT bool SKSEAPI SKSEPlugin_Load(const SKSE::LoadInterface * a_skse)
+{
+	InitLogger();
+	logger::info("ImprovementNamesCustomizedSSE loaded");
+
+	SKSE::Init(a_skse);
+
+	if (Settings::loadSettings()) {
+		logger::info("Settings successfully loaded");
+	} else {
+		logger::critical("Settings failed to load!");
+		return false;
 	}
-};
+
+	SKSE::AllocTrampoline(1 << 6);
+	TemperFactorManager::InstallHooks();
+
+	return true;
+}
+
