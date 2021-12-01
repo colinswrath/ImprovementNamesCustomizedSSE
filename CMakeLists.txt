@@ -91,6 +91,7 @@ set(SOURCES
 	src/Settings.h
 	src/TemperFactorManager.h
 	src/TemperFactorManager.cpp
+	src/Json2Settings.h
 )
 
 source_group(
