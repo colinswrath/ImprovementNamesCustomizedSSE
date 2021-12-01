@@ -1,4 +1,0 @@
-LIBRARY	"ImprovementNamesCustomizedSSE"
-EXPORTS
-SKSEPlugin_Query
-SKSEPlugin_Load

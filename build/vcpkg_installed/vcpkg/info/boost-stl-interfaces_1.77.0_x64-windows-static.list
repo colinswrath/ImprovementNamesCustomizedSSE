@@ -1,0 +1,15 @@
+x64-windows-static/
+x64-windows-static/include/
+x64-windows-static/include/boost/
+x64-windows-static/include/boost/stl_interfaces/
+x64-windows-static/include/boost/stl_interfaces/config.hpp
+x64-windows-static/include/boost/stl_interfaces/fwd.hpp
+x64-windows-static/include/boost/stl_interfaces/iterator_interface.hpp
+x64-windows-static/include/boost/stl_interfaces/reverse_iterator.hpp
+x64-windows-static/include/boost/stl_interfaces/sequence_container_interface.hpp
+x64-windows-static/include/boost/stl_interfaces/view_interface.hpp
+x64-windows-static/share/
+x64-windows-static/share/boost-stl-interfaces/
+x64-windows-static/share/boost-stl-interfaces/copyright
+x64-windows-static/share/boost-stl-interfaces/usage
+x64-windows-static/share/boost-stl-interfaces/vcpkg_abi_info.txt
