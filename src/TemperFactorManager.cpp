@@ -113,9 +113,7 @@ const char* TemperFactorManager::GetTemperFactor(float a_factor, bool a_isWeapon
 
 	auto level = static_cast<std::uint32_t>(fLevel);
 	auto it = _stringCache.insert(_formatterMap(level, a_isWeapon));
-
 	return it.first != _stringCache.end() ? it.first->c_str() : 0;
-	
 }
 
 
@@ -168,9 +166,9 @@ void TemperFactorManager::InstallHooks()
 			movzx(edx, r9b);
 			movaps(xmm0, xmm3);
 
-			sub(rsp, 20);
+			sub(rsp, 0x20);
 			call(ptr[rip + functLabel]);
-			add(rsp, 20);
+			add(rsp, 0x20);
 
 			mov(rbx, rax);
 			jmp(ptr[rip+retnLabel]);
@@ -184,7 +182,6 @@ void TemperFactorManager::InstallHooks()
 	};
 
 	TemperFactorHook_Code code(reinterpret_cast<std::uintptr_t>(GetTemperFactor), funcBase_Hook.address() + 0x149);
-	code.ready();
 
 	auto& trampoline = SKSE::GetTrampoline();
 	trampoline.write_branch<6>(funcBase_Hook.address() + 0x55, trampoline.allocate(code));

@@ -59,6 +59,10 @@ extern "C" DLLEXPORT bool SKSEAPI SKSEPlugin_Load(const SKSE::LoadInterface * a_
 
 	SKSE::AllocTrampoline(1<<7);
 	TemperFactorManager::InstallHooks();
+	//auto it = TemperFactorManager::_stringCache.insert(TemperFactorManager::_formatterMap(1, true));
+	//auto res = it.first != TemperFactorManager::_stringCache.end() ? it.first->c_str() : 0;
+
+	//logger::info(std::string(res));
 
 	return true;
 };
