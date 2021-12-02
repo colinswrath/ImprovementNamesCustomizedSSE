@@ -45,8 +45,8 @@ private:
 		std::string operator()(std::string_view a_name);
 
 	
-		void Insert(std::string a_name);
 	private:
+		void Insert(std::string a_name);
 		std::unordered_map<std::string_view, RE::Setting*> _map;
 	};
 
