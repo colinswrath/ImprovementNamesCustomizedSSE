@@ -17,11 +17,11 @@ BEGIN
 	BEGIN
 		BLOCK "040904b0"
 		BEGIN
-			VALUE "FileDescription", "ImprovementNamesCustomized"
+			VALUE "FileDescription", "ImprovementNamesCustomizedAE"
 			VALUE "FileVersion", "1.4.0.0"
-			VALUE "InternalName", "ImprovementNamesCustomized"
+			VALUE "InternalName", "ImprovementNamesCustomizedAE"
 			VALUE "LegalCopyright", "MIT License"
-			VALUE "ProductName", "ImprovementNamesCustomized"
+			VALUE "ProductName", "ImprovementNamesCustomizedAE"
 			VALUE "ProductVersion", "1.4.0.0"
 		END
 	END

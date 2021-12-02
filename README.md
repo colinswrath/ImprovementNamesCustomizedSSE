@@ -1,11 +1,11 @@
 # Improvement Names Customized SSE
-
+Improvement Names Customized ported for Skyrim SE 1.6.x+ (Otherwise known as AE).
+It has also been restructured to use CMake and newer CommonLib versions.
 ## Build Dependencies
 * [Json2Settings](https://github.com/Ryan-rsm-McKenzie/Json2Settings)
-* [CommonLibSSE](https://github.com/Ryan-rsm-McKenzie/CommonLibSSE)
-
 ## End User Dependencies
 * [SKSE64](https://skse.silverlock.org/)
+* [Address Library AE] (https://www.nexusmods.com/skyrimspecialedition/mods/32444)
 
 ## Settings
 Setting | Description

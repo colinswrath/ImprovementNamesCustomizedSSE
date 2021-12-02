@@ -1,9 +1,9 @@
-Package: rsm-binary-io
-Version: 2.0.4
+Package: nlohmann-json
+Version: 3.10.4
 Depends: vcpkg-cmake:x64-windows, vcpkg-cmake-config:x64-windows
 Architecture: x64-windows-static
 Multi-Arch: same
-Abi: 9004947e861fe657bb42576a6612f9a0b316fa7ae7cb7ba87974174223fcb449
-Description: A binary i/o library for C++, without the agonizing pain
+Abi: 5d700b5c794cb103b7831227d21e816c6e9de95e9526e95642fc9c05c9ab2ad0
+Description: JSON for Modern C++
 Type: Port
 Status: install ok installed

@@ -95,7 +95,7 @@ CMAKE_INSTALL_MANDIR:PATH=
 CMAKE_INSTALL_OLDINCLUDEDIR:PATH=/usr/include
 
 //Install path prefix, prepended onto install directories.
-CMAKE_INSTALL_PREFIX:PATH=C:/Program Files (x86)/ImprovementNamesCustomized
+CMAKE_INSTALL_PREFIX:PATH=C:/Program Files (x86)/ImprovementNamesCustomizedAE
 
 //Run-time variable data (LOCALSTATEDIR/run)
 CMAKE_INSTALL_RUNSTATEDIR:PATH=
@@ -144,7 +144,7 @@ CMAKE_PROJECT_DESCRIPTION:STATIC=
 CMAKE_PROJECT_HOMEPAGE_URL:STATIC=
 
 //Value Computed by CMake
-CMAKE_PROJECT_NAME:STATIC=ImprovementNamesCustomized
+CMAKE_PROJECT_NAME:STATIC=ImprovementNamesCustomizedAE
 
 //Value Computed by CMake
 CMAKE_PROJECT_VERSION:STATIC=1.4.0
@@ -245,10 +245,10 @@ CommonLibSSE_BINARY_DIR:STATIC=D:/ImprovementNamesCustomized/ImprovementNamesCus
 CommonLibSSE_SOURCE_DIR:STATIC=D:/ImprovementNamesCustomized/ImprovementNamesCustomizedSSE/extern/CommonLibSSE
 
 //Value Computed by CMake
-ImprovementNamesCustomized_BINARY_DIR:STATIC=D:/ImprovementNamesCustomized/ImprovementNamesCustomizedSSE/build
+ImprovementNamesCustomizedAE_BINARY_DIR:STATIC=D:/ImprovementNamesCustomized/ImprovementNamesCustomizedSSE/build
 
 //Value Computed by CMake
-ImprovementNamesCustomized_SOURCE_DIR:STATIC=D:/ImprovementNamesCustomized/ImprovementNamesCustomizedSSE
+ImprovementNamesCustomizedAE_SOURCE_DIR:STATIC=D:/ImprovementNamesCustomized/ImprovementNamesCustomizedSSE
 
 //Enables trampoline support for Xbyak.
 SKSE_SUPPORT_XBYAK:BOOL=OFF
@@ -506,5 +506,5 @@ _Boost_USE_MULTITHREADED_LAST:INTERNAL=ON
 //Last used Boost_USE_STATIC_LIBS value.
 _Boost_USE_STATIC_LIBS_LAST:INTERNAL=OFF
 //CMAKE_INSTALL_PREFIX during last run
-_GNUInstallDirs_LAST_CMAKE_INSTALL_PREFIX:INTERNAL=C:/Program Files (x86)/ImprovementNamesCustomized
+_GNUInstallDirs_LAST_CMAKE_INSTALL_PREFIX:INTERNAL=C:/Program Files (x86)/ImprovementNamesCustomizedAE
 

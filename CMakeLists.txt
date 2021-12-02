@@ -31,7 +31,7 @@ set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>" CACHE STR
 # ---- Project ----
 
 project(
-	ImprovementNamesCustomized
+	ImprovementNamesCustomizedAE
 	VERSION 1.4.0
 	LANGUAGES CXX
 )
@@ -86,14 +86,7 @@ find_package(spdlog REQUIRED CONFIG)
 
 # ---- Add source files ----
 
-set(SOURCES
-	src/main.cpp
-	src/PCH.h
-	src/Settings.h
-	src/Settings.cpp
-	src/TemperFactorManager.h
-	src/TemperFactorManager.cpp
-)
+include(cmake/sourcelist.cmake)
 
 source_group(
 	TREE
@@ -131,7 +124,7 @@ target_include_directories(
 	${PROJECT_NAME}
 	PRIVATE
 		${CMAKE_CURRENT_BINARY_DIR}/include
-		${CMAKE_CURRENT_SOURCE_DIR}/src
+		${CMAKE_CURRENT_SOURCE_DIR}/include
 )
 
 target_link_libraries(
@@ -196,7 +189,7 @@ endif ()
 target_precompile_headers(
 	${PROJECT_NAME}
 	PRIVATE
-		src/PCH.h
+		include/PCH.h
 )
 
 # ---- Post build ----
