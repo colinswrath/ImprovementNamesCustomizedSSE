@@ -24,7 +24,7 @@ void InitLogger()
 	log->set_level(spdlog::level::trace);
 #else
 	log->set_level(spdlog::level::info);
-	log->flush_on(spdlog::level::warn);
+	log->flush_on(spdlog::level::info);
 #endif
 
 	spdlog::set_default_logger(std::move(log));
@@ -57,9 +57,8 @@ extern "C" DLLEXPORT bool SKSEAPI SKSEPlugin_Load(const SKSE::LoadInterface * a_
 		return false;
 	}
 
-	SKSE::AllocTrampoline(1 << 6);
+	SKSE::AllocTrampoline(1<<7);
 	TemperFactorManager::InstallHooks();
 
 	return true;
-}
-
+};

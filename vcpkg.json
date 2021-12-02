@@ -8,6 +8,6 @@
     "boost-stl-interfaces",
     "rsm-binary-io",
     "spdlog",
-	"nlohmann-json"
+	"xbyak"
   ]
 }

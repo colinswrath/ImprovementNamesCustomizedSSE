@@ -106,14 +106,16 @@ std::string TemperFactorManager::AsRomanNumeral(std::uint32_t a_level, [[maybe_u
 
 const char* TemperFactorManager::GetTemperFactor(float a_factor, bool a_isWeapon)
 {
-	auto fLevel = std::roundf((a_factor - 1.0) * 10.0);
+	auto fLevel = std::roundf((a_factor - 1.0f) * 10.0f);
 	if (fLevel < 1.0) {
 		return 0;
 	}
 
 	auto level = static_cast<std::uint32_t>(fLevel);
 	auto it = _stringCache.insert(_formatterMap(level, a_isWeapon));
+
 	return it.first != _stringCache.end() ? it.first->c_str() : 0;
+	
 }
 
 
@@ -153,15 +155,45 @@ void TemperFactorManager::sprintf_s(char* a_buffer, std::size_t a_buffSize, cons
 
 void TemperFactorManager::InstallHooks()
 {
-	REL::Offset<std::uintptr_t> funcBase(REL::ID(12633));
 
-	auto trampoline = SKSE::GetTrampoline();
-	trampoline->Write5Call(funcBase.GetAddress() + 0x59, &TemperFactorManager::GetTemperFactor);
-	trampoline->Write5Call(funcBase.GetAddress() + 0x1A6, &TemperFactorManager::VFormat);
-	trampoline->Write5Call(funcBase.GetAddress() + 0x177, &TemperFactorManager::VFormat);
-	trampoline->Write5Call(funcBase.GetAddress() + 0x13D, &TemperFactorManager::sprintf_s);
+	REL::Relocation<std::uintptr_t> funcBase_Hook(REL::ID(12775));
+	
+	struct TemperFactorHook_Code : Xbyak::CodeGenerator
+	{
+		TemperFactorHook_Code(std::uintptr_t GetTemperAddr, std::uintptr_t returnAddr)
+		{
+			Xbyak::Label functLabel;
+			Xbyak::Label retnLabel;
 
-	_MESSAGE("Installed hooks for %s", typeid(TemperFactorManager).name());
+			movzx(edx, r9b);
+			movaps(xmm0, xmm3);
+
+			sub(rsp, 20);
+			call(ptr[rip + functLabel]);
+			add(rsp, 20);
+
+			mov(rbx, rax);
+			jmp(ptr[rip+retnLabel]);
+
+			L(functLabel);
+			dq(GetTemperAddr);
+
+			L(retnLabel);
+			dq(returnAddr);
+		}
+	};
+
+	TemperFactorHook_Code code(reinterpret_cast<std::uintptr_t>(GetTemperFactor), funcBase_Hook.address() + 0x149);
+	code.ready();
+
+	auto& trampoline = SKSE::GetTrampoline();
+	trampoline.write_branch<6>(funcBase_Hook.address() + 0x55, trampoline.allocate(code));
+	
+	trampoline.write_call<5>(funcBase_Hook.address() + 0x25C, TemperFactorManager::VFormat);
+	trampoline.write_call<5>(funcBase_Hook.address() + 0x22D, TemperFactorManager::VFormat);
+	trampoline.write_call<5>(funcBase_Hook.address() + 0x1F6, TemperFactorManager::sprintf_s);
+
+	logger::info("Installed hooks for %s", typeid(TemperFactorManager).name());
 }
 
 

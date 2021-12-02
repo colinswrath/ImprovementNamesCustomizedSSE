@@ -90,9 +90,9 @@ set(SOURCES
 	src/main.cpp
 	src/PCH.h
 	src/Settings.h
+	src/Settings.cpp
 	src/TemperFactorManager.h
 	src/TemperFactorManager.cpp
-	src/Json2Settings.h
 )
 
 source_group(

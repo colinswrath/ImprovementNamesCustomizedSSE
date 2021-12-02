@@ -4,7 +4,6 @@
 
 namespace J2S = Json2Settings;
 
-
 class Settings
 {
 public:

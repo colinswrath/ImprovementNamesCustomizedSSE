@@ -11,12 +11,12 @@
 class TemperFactorManager
 {
 public:
-	static std::string AsVanilla(UInt32 a_level, bool a_isWeapon);
-	static std::string AsVanillaPlus(UInt32 a_level, bool a_isWeapon);
-	static std::string AsPlusN(UInt32 a_level, bool a_isWeapon);
-	static std::string AsInternal(UInt32 a_level, bool a_isWeapon);
-	static std::string AsCustom(UInt32 a_level, bool a_isWeapon);
-	static std::string AsRomanNumeral(UInt32 a_level, bool a_isWeapon);
+	static std::string AsVanilla(std::uint32_t a_level, bool a_isWeapon);
+	static std::string AsVanillaPlus(std::uint32_t a_level, bool a_isWeapon);
+	static std::string AsPlusN(std::uint32_t a_level, bool a_isWeapon);
+	static std::string AsInternal(std::uint32_t a_level, bool a_isWeapon);
+	static std::string AsCustom(std::uint32_t a_level, bool a_isWeapon);
+	static std::string AsRomanNumeral(std::uint32_t a_level, bool a_isWeapon);
 
 	static const char* GetTemperFactor(float a_factor, bool a_isWeapon);
 	static void VFormat(RE::BSString* a_dst, const char* a_fmt, ...);
@@ -30,10 +30,10 @@ private:
 	public:
 		FormatterMap();
 
-		std::string operator()(UInt32 a_factor, bool a_isWeapon);
+		std::string operator()(std::uint32_t a_factor, bool a_isWeapon);
 
 	private:
-		std::unordered_map<std::string, std::function<std::string(UInt32, bool)>> _map;
+		std::unordered_map<std::string, std::function<std::string(std::uint32_t, bool)>> _map;
 	};
 
 
