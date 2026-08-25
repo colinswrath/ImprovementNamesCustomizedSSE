@@ -10,7 +10,6 @@ bool Settings::loadSettings(bool a_dumpParse)
 	return success;
 }
 
-
 decltype(Settings::style) Settings::style("style", "PlusN");
 decltype(Settings::prefix) Settings::prefix("prefix", " [");
 decltype(Settings::postfix) Settings::postfix("postfix", "]");
