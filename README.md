@@ -1,16 +1,17 @@
-# Improvement Names Customized SSE
-Improvement Names Customized ported for Skyrim SE 1.6.x+ (Otherwise known as AE).
-It has also been restructured to use CMake and newer CommonLib versions.
-## Build Dependencies
-* [Json2Settings](https://github.com/Ryan-rsm-McKenzie/Json2Settings)
-## End User Dependencies
-* [SKSE64](https://skse.silverlock.org/)
-* [Address Library AE] (https://www.nexusmods.com/skyrimspecialedition/mods/32444)
 
-## Settings
-Setting | Description
---- | ---
-`style` | The improvement string display style. Valid inputs are: `"Vanilla"`, `"VanillaPlus"`, `"PlusN"`, `"Internal"`, `"Custom"`, and `"RomanNumeral"`.
-`prefix` | The improvement string prefix.
-`postfix` | The improvement string postfix.
-`customNames` | A set of strings to be used when `"Custom"` style is selected.
+## What does it do?  
+
+
+## Requirements
+* [CMake](https://cmake.org/)
+	* Add this to your `PATH`
+* [PowerShell](https://github.com/PowerShell/PowerShell/releases/latest)
+* [Vcpkg](https://github.com/microsoft/vcpkg)
+	* Add the environment variable `VCPKG_ROOT` with the value as the path to the folder containing vcpkg
+* [Visual Studio Community 2019](https://visualstudio.microsoft.com/)
+	* Desktop development with C++
+
+## Register Visual Studio as a Generator
+* Open `x64 Native Tools Command Prompt`
+* Run `cmake`
+* Close the cmd window
